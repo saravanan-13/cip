@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title> Visual Cryptography | CIP </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--<link rel="stylesheet" href="css/mainpage.css" />-->
+    <style>
+        .signup{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        #register{
+
+        }
+        #my-node {
+            background:transparent;
+            width: 600px;
+            height: 400px;
+            color: black;
+            font-size: 20px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body{
+            background: #fff url(images/bg.jpg) repeat top left;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+    <link rel="stylesheet" href="css/css/animate-custom.css">
+    <link rel="stylesheet" href="css/css/demo.css">
+    <link rel="stylesheet" href="css/css/style.css">
+</head>
+
+<body>
+
+
+<div class="container signup">
+    <section id="signup-login">
+        <div id="container_demo" >
+            <a class="hiddenanchor" id="toregister"></a>
+            <a class="hiddenanchor" id="tologin"></a>
+            <div id="wrapper">
+                <div id="login" class="animate form">
+                    <form  action="/api/login" autocomplete="on" method="post">
+                        <h1>Log in</h1>
+                        <p>
+                            <label for="username" class="uname" data-icon="u"><i class="fa fa-user-o" aria-hidden="true"></i>
+                                Your email or username </label>
+                            <input id="username" name="username"  required="required" type="text" placeholder="Enter your username"/>
+                        </p>
+                        <p>
+                            <label for="password" class="youpasswd"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                Your password </label>
+                            <input id="password" name="password"  required="required" type="password" placeholder="Enter your password" />
+                        </p>
+                        <p class="login button">
+                            <input type="submit" value="Login" style="text-align: center"/>
+                        </p>
+                        <p class="change_link">
+                            Not a member yet ?
+                            <a href="#toregister" class="to_register">Join us</a>
+                        </p>
+                    </form>
+                </div>
+
+                <div id="register" class="animate form" style=" margin-bottom: 0;padding-top:0;margin-top: -5%;">
+                    <form  action="/api/register" autocomplete="on" method="post">
+                        <h1> Sign up </h1>
+                        <p>
+                            <label for="usernamesignup" class="uname"><i class="fa fa-user-o" aria-hidden="true"></i>
+                                Your username</label>
+                            <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="Enter Username" />
+                        </p>
+                        <p>
+                            <label for="emailsignup" class="youmail"><i class="fa fa-envelope-open" aria-hidden="true"></i>
+                                Your email</label>
+                            <input id="emailsignup" name="emailsignup"  type="text" placeholder="Enter email id"/>
+                        </p>
+                        <p>
+                            <label for="passwordsignup" class="youpasswd"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                Your password </label>
+                            <input id="passwordsignup" name="passwordsignup"  type="password" placeholder="Enter the password"/>
+                        </p>
+                        <p>
+                            <label for="passwordsignup_confirm" class="youpasswd">
+                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                Please confirm your password </label>
+                            <input id="passwordsignup_confirm" name="passwordsignup_confirm"  type="password" placeholder="Confirm your password"/>
+                        </p>
+                        <p class="signin button">
+                            <input type="submit" value="Sign up"/>
+                        </p>
+                        <p class="change_link">
+                            Already a member ?
+                            <a href="#tologin" class="to_register"> Go and log in </a>
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+    <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--<script>-->
+    <!--function login(){-->
+
+        <!--var username = document.getElementById('username').value;-->
+        <!--var password = document.getElementById('password').value;-->
+        <!--console.log(username+" -> "+password);-->
+        <!--var node = document.getElementById('my-node');-->
+        <!--node.innerHTML = username+' -> '+ password;-->
+        <!--domtoimage.toBlob(document.getElementById('my-node'))-->
+            <!--.then(function(blob) {-->
+                <!--window.saveAs(blob, 'test.png');-->
+                <!--node.innerHTML = "";-->
+            <!--});-->
+    <!--}-->
+<!--</script>-->
+
+</body>
+
+</html>
