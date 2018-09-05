@@ -34,7 +34,7 @@ exports.register = function(req, res) {
         "image":""
     };
 
-    var child = exec("javac /home/saravanan/Documents/CIP/node-java/*.java", function(error, stdout, stderr) {
+    var child = exec("javac /home/saravanan/Documents/CIP/cip/*.java", function(error, stdout, stderr) {
         if (error !== null) {
             console.log('exec error : ' + error);
         }
@@ -49,13 +49,13 @@ exports.register = function(req, res) {
     });
 
     setTimeout(function () {
-        var child = exec("mv /home/saravanan/Documents/CIP/node-java/key.png /home/saravanan/Documents/CIP/node-java/project/uploads/"+users.username+".png", function(error, stdout, stderr) {
+        var child = exec("mv /home/saravanan/Documents/CIP/cip/key.png /home/saravanan/Documents/CIP/cip/project/uploads/"+users.username+".png", function(error, stdout, stderr) {
             if (error !== null) {
                 console.log('exec error : ' + error);
             }
         });
 
-          users.image = '/home/saravanan/Documents/CIP/node-java/project/uploads/'+users.username +'.png';
+          users.image = '/home/saravanan/Documents/CIP/cip/project/uploads/'+users.username +'.png';
         // console.log("image : ",users.image);
 
         connection.query('INSERT INTO register SET ?', users, function(error, results, fields) {
@@ -85,7 +85,7 @@ exports.login = function(req, res) {
     fs.writeFileSync('out.png', text2png(textinimage, {textColor: 'black',fontSize:'100px sans-serif',bgColor:'white',padding:100}));
 
 
-        var child = exec("javac /home/saravanan/Documents/CIP/node-java/*.java", function(error, stdout, stderr) {
+        var child = exec("javac /home/saravanan/Documents/CIP/cip/*.java", function(error, stdout, stderr) {
             //sys.print('stdout : ' + stdout);
             //sys.print('stderr : ' + stderr);
             if (error !== null) {
@@ -102,7 +102,7 @@ exports.login = function(req, res) {
                 res.sendFile(path.join(__dirname + '/404.html'));
             } else {
                 // console.log(rows[0].image);
-                keyimage = "/home/saravanan/Documents/CIP/node-java/project/uploads/" + username + ".png";
+                keyimage = "/home/saravanan/Documents/CIP/cip/project/uploads/" + username + ".png";
                 decryptkeyimage = keyimage;
 
                 var command = "java Encrypt " + " " + keyimage + "  " + "out.png";
@@ -131,7 +131,7 @@ exports.login = function(req, res) {
                 console.log('exec error : ' + error);
             }
 
-            command = "rm /home/saravanan/Documents/CIP/node-java/crypt.png /home/saravanan/Documents/CIP/node-java/out.png";
+            command = "rm /home/saravanan/Documents/CIP/cip/crypt.png /home/saravanan/Documents/CIP/cip/out.png";
             var child = exec(command, function(error, stdout, stderr) {
                 sys.print('stdout : ' + stdout);
                 sys.print('stderr : ' + stderr);
@@ -141,7 +141,7 @@ exports.login = function(req, res) {
                // res.send("Logged in!");
             });
 
-            const fileName = '/home/saravanan/Documents/CIP/node-java/clean.png';
+            const fileName = '/home/saravanan/Documents/CIP/cip/clean.png';
 
             client.textDetection(fileName)
                 .then(function (results) {
