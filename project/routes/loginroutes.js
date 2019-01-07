@@ -6,10 +6,11 @@ var Cryptr = require('cryptr'),
     cryptr = new Cryptr('myTotalySecretKey');
 
 var fs = require('fs');
+var tesseract = require('node-tesseract');
 
-const vision = require('@google-cloud/vision');
+var vision = require('@google-cloud/vision');
 
-const client = new vision.ImageAnnotatorClient();
+var client = new vision.ImageAnnotatorClient();
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -67,7 +68,7 @@ exports.register = function(req, res) {
                 res.sendFile(path.join(__dirname + '/mainpage.html'));
             }
         });
-    },1500);
+    },2000);
 
 };
 
@@ -78,11 +79,11 @@ exports.login = function(req, res) {
     var password = req.body.password;
     //password = cryptr.encrypt(password);
 
-    var textinimage = username+'##'+password;
+    var textinimage = username+"##"+password;
 
-    console.lo
     var text2png = require('text2png');
     fs.writeFileSync('out.png', text2png(textinimage, {textColor: 'black',fontSize:'100px sans-serif',bgColor:'white',padding:100}));
+
 
 
         var child = exec("javac /home/saravanan/Documents/CIP/cip/*.java", function(error, stdout, stderr) {
@@ -131,28 +132,36 @@ exports.login = function(req, res) {
                 console.log('exec error : ' + error);
             }
 
-            command = "rm /home/saravanan/Documents/CIP/cip/crypt.png /home/saravanan/Documents/CIP/cip/out.png";
-            var child = exec(command, function(error, stdout, stderr) {
-                sys.print('stdout : ' + stdout);
-                sys.print('stderr : ' + stderr);
-                if (error !== null) {
-                    console.log('exec error : ' + error);
-                }
-               // res.send("Logged in!");
-            });
+            // command = "rm /home/saravanan/Documents/CIP/cip/crypt.png /home/saravanan/Documents/CIP/cip/out.png";
+            // var child = exec(command, function(error, stdout, stderr) {
+            //     sys.print('stdout : ' + stdout);
+            //     sys.print('stderr : ' + stderr);
+            //     if (error !== null) {
+            //         console.log('exec error : ' + error);
+            //     }
+            //    // res.send("Logged in!");
+            // });
 
-            const fileName = '/home/saravanan/Documents/CIP/cip/clean.png';
+            var fileName = '/home/saravanan/Documents/CIP/cip/clean.png';
 
             client.textDetection(fileName)
                 .then(function (results) {
-                    const detections = results[0].textAnnotations;
+                    var detections = results[0].textAnnotations;
                     //    console.log('Text:');
                     var extractedtext = "";
                     detections.forEach(function (text) {
-                    //    console.log(text.description);
-                        if(extractedtext === "")
+                           console.log("text : ",text.description);
+                        if (extractedtext === "")
                             extractedtext = text.description;
                     });
+            //     });
+            //
+            // tesseract.process(fileName,function(err,extractedtext) {
+            //     if(err) {
+            //         console.error(err);
+            //     } else {
+            //         console.log(extractedtext);
+            //     }
 
                    // console.log("ocr : ",extractedtext);
                  //   console.log('\n');
@@ -163,7 +172,6 @@ exports.login = function(req, res) {
                     setTimeout(function() {
                         connection.query('SELECT * FROM register WHERE username = ? AND password= ?',[userpass[0],userpass[1]], function(err, rows, fields) {
                             if (err) {
-                                console.log("error ocurred", error);
                                 res.sendFile(path.join(__dirname + '/404.html'));
 
                             } else {
@@ -184,9 +192,6 @@ exports.login = function(req, res) {
                     }, 500);
 
 
-                })
-                .catch(function (err){
-                    console.error('ERROR:', err);
                 });
         });
 
@@ -195,36 +200,4 @@ exports.login = function(req, res) {
 
 };
 
-
-exports.submit = function(req, res) {
-
-    //console.log("req", req.body);
-    //console.log(req.session.userId);
-    var users = {
-        "email": req.session.userId,
-        "cust_name": req.body.cname,
-        "product_name": req.body.pname,
-        "product_type": req.body.ptype,
-        "type": req.body.ttype,
-        "proof": req.body.pproof,
-        "description": req.body.message,
-        "status": "pending",
-        "amount": 0
-    }
-
-    connection.query('INSERT INTO product SET ?', users, function(error, results, fields) {
-        if (error) {
-            console.log("error ocurred", error);
-            res.send({
-                "code": 400,
-                "failed": "error ocurred"
-            })
-        } else {
-            console.log("Success!");
-            res.sendFile(path.join(__dirname + '/mainpage.html'));
-        }
-    });
-
-
-};
 

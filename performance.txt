@@ -1,0 +1,10 @@
+ImageGeneration - 1sec - 1sec
+FirstSharedImage - 1.5sec - 2.5sec
+Signup - 0.5 sec - 3sec
+
+ImageGeneration - 1sec - 1sec
+SecondSharedImage (Encryption) - 6sec - 7sec
+SecondSharedImage (Encryption) - 6sec - 13sec
+CredentialsRecogintion - 2sec - 15sec
+Authentication - 2sec - 17sec
+	
